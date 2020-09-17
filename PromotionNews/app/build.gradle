@@ -10,7 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        vectorDrawables.useSupportLibrary = true // Android 5.0 (API level 21 이하, VectorDrawable 지원)
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8

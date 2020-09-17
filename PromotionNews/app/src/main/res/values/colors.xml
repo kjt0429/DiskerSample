@@ -3,5 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="colorWhite">#ffffff</color>
     <color name="com_hive_sdk_promotion_dialog_background_color">#E6000000</color>
+    <color name="com_hive_sdk_promotion_news_tab_item_color">#636a8c</color>
+
 </resources>
