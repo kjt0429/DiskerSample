@@ -10,17 +10,28 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
 public class PromotionNewsActivity extends AppCompatActivity {
 
 	private TabListAdapter.TabItemHolder clickedTabItem = null;
+
+	private ArrayList<Fragment> fragments = new ArrayList<>();
+
+	FragmentManager fm;
+	FragmentTransaction tran;
+
+	FrameLayout frameLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,56 +42,112 @@ public class PromotionNewsActivity extends AppCompatActivity {
 			Util.setOnSystemUiVisibilityChangeListener(getWindow().getDecorView());
 
 
+		/*
+		생성자에서 무언의 뷰 모델을 받아서 수정하기
+		 */
+
+		ArrayList<String> dummyArray = getTabItemList();
+		for (String data : dummyArray) {
+
+			if(data.equals("banner")){
+				fragments.add(new NewsBannerFragment());
+			}else{
+				fragments.add(new NewsWebFragment(data));
+			}
+
+		}
+
+		setFrag(0);
+
+
 		ListView tabList = findViewById(R.id.tabList);
 
-		TabListAdapter tabListAdapter = new TabListAdapter(this, getTabItemList());
+		TabListAdapter tabListAdapter = new TabListAdapter(this, dummyArray);
 		tabList.setAdapter(tabListAdapter);
+
 
 		tabList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if(clickedTabItem != null){
-					clickedTabItem.background.setVisibility(View.INVISIBLE);
-					clickedTabItem.name.setTextColor(getResources().getColor(R.color.com_hive_sdk_promotion_news_tab_item_color));
+
+				if(position != 0){
+					View v = tabList.getChildAt(0);
+					TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder)v.getTag());
+					item.offItem();
 				}
+
+				if(clickedTabItem != null){
+					clickedTabItem.offItem();
+				}
+
+
+
 				TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder)view.getTag());
-				item.background.setVisibility(View.VISIBLE);
-				item.name.setTextColor(getResources().getColor(R.color.colorWhite));
+				item.onItem();
 				clickedTabItem = item;
+
+
+
+				// todo check
+				setFrag(position);
 
 			}
 		});
 
+
+		// TODO
+		frameLayout = findViewById(R.id.frameLayout_frameLayout);
+
+
+
+
+
 	}
 
+	public void addView(String type) {
+		switch (type) {
+			case "frame":
+				NewsFrameView view = new NewsFrameView(this);
+				frameLayout.addView(view);
+				break;
+			default:
+				break;
+		}
+	}
 
+	public View getViewByPosition(int pos, ListView listView) {
+		final int firstListItemPosition = listView.getFirstVisiblePosition();
+		final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+		if (pos < firstListItemPosition || pos > lastListItemPosition) {
+			return listView.getAdapter().getView(pos, null, listView);
+		} else {
+			final int childIndex = pos - firstListItemPosition;
+			return listView.getChildAt(childIndex);
+		}
+	}
 
 	// 테스트 용 더미
 	private ArrayList<String> getTabItemList() {
 		ArrayList<String> list = new ArrayList<>();
 
-		list.add("tabItem1");
-		list.add("tabItem2");
-		list.add("tabItem3");
-		list.add("tabItem1");
-		list.add("tabItem2");
-		list.add("tabItem3");
-		list.add("tabItem1");
-		list.add("tabItem2");
-		list.add("tabItem3");
-		list.add("tabItem1");
-		list.add("tabItem2");
-		list.add("tabItem3");
-		list.add("tabItem1");
-		list.add("tabItem2");
-		list.add("tabItem3");
-		list.add("tabItem1");
-		list.add("tabItem2");
-		list.add("tabItem3");
+		list.add("https://developers.withhive.com/");
+		list.add("https://www.google.com");
+		list.add("banner");
+		list.add("banner");
+
 
 		return list;
 	}
 
+	public void setFrag(int n){    //프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
+		fm = getSupportFragmentManager();
+		tran = fm.beginTransaction();
+
+		tran.replace(R.id.contentViewLayout, fragments.get(n));
+		tran.commit();
+
+	}
 
 	private class TabListAdapter extends BaseAdapter {
 
@@ -97,8 +164,6 @@ public class PromotionNewsActivity extends AppCompatActivity {
 			this.mInflater = (LayoutInflater) context.getSystemService((Context.LAYOUT_INFLATER_SERVICE));
 
 		}
-
-
 
 		@Override
 		public int getCount() {
@@ -151,6 +216,10 @@ public class PromotionNewsActivity extends AppCompatActivity {
 			viewHolder.name.setTextSize(textScaledPixel);
 
 
+			if(position==0){
+				viewHolder.onItem();
+			}
+
 			return convertView;
 
 		}
@@ -160,6 +229,25 @@ public class PromotionNewsActivity extends AppCompatActivity {
 			public AppCompatImageView background;
 			public AppCompatImageView icon;
 			public AppCompatTextView name;
+
+			public void onItem(){
+				try {
+					background.setVisibility(View.VISIBLE);
+					name.setTextColor(getResources().getColor(R.color.colorWhite));
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+			}
+
+			public void offItem(){
+				try {
+					background.setVisibility(View.INVISIBLE);
+					name.setTextColor(getResources().getColor(R.color.com_hive_sdk_promotion_news_tab_item_color));
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+			}
 		}
 	}
+
 }
