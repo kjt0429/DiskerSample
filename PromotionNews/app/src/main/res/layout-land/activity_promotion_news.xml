@@ -171,6 +171,40 @@
 
         </FrameLayout>
 
+        <Space
+            android:id="@+id/closeBtn_imageView_marginStart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.77236" />
+
+        <Space
+            android:id="@+id/closeBtn_imageView_marginBottom"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/frameLayout_frameLayout"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.84166"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/frame_close_btn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintStart_toEndOf="@id/closeBtn_imageView_marginStart"
+            app:layout_constraintBottom_toTopOf="@+id/closeBtn_imageView_marginBottom"
+
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.04736"
+            app:layout_constraintDimensionRatio="1:1"
+
+            app:srcCompat="@drawable/promotion_news_v2_frame_close_btn"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

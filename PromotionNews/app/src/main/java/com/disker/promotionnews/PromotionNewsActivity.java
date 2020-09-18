@@ -33,6 +33,9 @@ public class PromotionNewsActivity extends AppCompatActivity {
 
 	FrameLayout frameLayout;
 
+
+	FrameLayout newsV2View;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,7 +84,6 @@ public class PromotionNewsActivity extends AppCompatActivity {
 				}
 
 
-
 				TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder)view.getTag());
 				item.onItem();
 				clickedTabItem = item;
@@ -98,6 +100,15 @@ public class PromotionNewsActivity extends AppCompatActivity {
 		// TODO
 		frameLayout = findViewById(R.id.frameLayout_frameLayout);
 
+		AppCompatImageView frame_close_btn = findViewById(R.id.frame_close_btn);
+
+		// TODO: 애니메이션 처리해야함
+		frame_close_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 
 
 
@@ -108,11 +119,18 @@ public class PromotionNewsActivity extends AppCompatActivity {
 		switch (type) {
 			case "frame":
 				NewsFrameView view = new NewsFrameView(this);
+				newsV2View = view; // TODO remove
 				frameLayout.addView(view);
 				break;
 			default:
 				break;
 		}
+
+
+	}
+
+	public void removeView(){
+		frameLayout.removeView(newsV2View);
 	}
 
 	public View getViewByPosition(int pos, ListView listView) {

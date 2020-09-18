@@ -9,6 +9,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -55,6 +56,8 @@ public class PromotionCustomViewRoundedCorner extends FrameLayout {
 			a.recycle();
 		}
 
+		Log.d("disker11",cornerRadius+"");
+
 		if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
 			setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 		}
@@ -63,11 +66,19 @@ public class PromotionCustomViewRoundedCorner extends FrameLayout {
 			setLayerType(View.LAYER_TYPE_HARDWARE, null);       //  LG V40 device has exception.
 		}
 
+		setCornerRadius(cornerRadius);
+	}
+
+	public void setCornerRadius(float radius){
+		cornerRadius = radius;
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			GradientDrawable drawable = new GradientDrawable();
 			drawable.setCornerRadius(cornerRadius);
+
 			setBackground(drawable);
 			setClipToOutline(true);
+
 		}
 	}
 
