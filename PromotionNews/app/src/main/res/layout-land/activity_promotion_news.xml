@@ -171,33 +171,39 @@
 
         </FrameLayout>
 
+
+        <!-- close button -->
         <Space
-            android:id="@+id/closeBtn_imageView_marginStart"
+            android:id="@+id/frameLayout_frameLayout_padding_End"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/frameLayout_frameLayout"
-            app:layout_constraintTop_toTopOf="parent"
+
             app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="0.77236" />
+            app:layout_constraintWidth_percent="0.03947"
+
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintEnd_toEndOf="@id/frameLayout_frameLayout"/>
 
         <Space
-            android:id="@+id/closeBtn_imageView_marginBottom"
+            android:id="@+id/frameLayout_frameLayout_padding_Top"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/frameLayout_frameLayout"
+
             app:layout_constraintHeight_default="percent"
-            app:layout_constraintHeight_percent="0.84166"/>
+            app:layout_constraintHeight_percent="0.072222"
+
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_frameLayout"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/frame_close_btn"
             android:layout_width="0dp"
             android:layout_height="0dp"
 
-            app:layout_constraintStart_toEndOf="@id/closeBtn_imageView_marginStart"
-            app:layout_constraintBottom_toTopOf="@+id/closeBtn_imageView_marginBottom"
+            app:layout_constraintStart_toStartOf="@id/frameLayout_frameLayout_padding_End"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_frameLayout_padding_Top"
 
             app:layout_constraintWidth_default="percent"
             app:layout_constraintWidth_percent="0.04736"
