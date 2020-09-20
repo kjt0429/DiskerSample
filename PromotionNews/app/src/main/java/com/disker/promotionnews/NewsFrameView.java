@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 class NewsFrameView extends FrameLayout {
 
@@ -22,13 +23,38 @@ class NewsFrameView extends FrameLayout {
 
 	WebView webView;
 
-	public NewsFrameView(@NonNull Context context) {
+	// TODO : 아래 변수 .. 모델로 받기.
+	boolean isForced = false;
+
+	public NewsFrameView(@NonNull Context context, Boolean isForced) {
 		super(context);
 		mContext = context;
+		isForced = isForced;
 
 		ViewGroup viewGroup = (ViewGroup)View.inflate(context, R.layout.news_frame_view, this);
 
 		roundedCorner = viewGroup.findViewById(R.id.rounded_corner);
+
+
+		ConstraintLayout bottomLayout = viewGroup.findViewById(R.id.contentLayout_bottom);
+
+		if(isForced){
+			// 바텀 프레임 보임
+			bottomLayout.setVisibility(View.VISIBLE);
+
+			Display display = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+			Point p = new Point();
+			display.getSize(p);
+
+			// TODO: 한쪽 방향 코너 지정 이슈.. (웹뷰 의 경우 shape로 처리도 안되고, 기타 API는 os level 분기)
+			roundedCorner.setPadding(0,0,0,(int)(p.y*0.09722));
+
+		}else{
+			// 바텀 프레임 보이지 않음
+			bottomLayout.setVisibility(View.INVISIBLE);
+		}
+
+
 
 		webView = viewGroup.findViewById(R.id.webView);
 
@@ -52,7 +78,7 @@ class NewsFrameView extends FrameLayout {
 				if (webView.canGoBack()) {
 					webView.goBack();
 				} else {
-					((PromotionNewsActivity) mContext).removeView();
+					((PromotionNewsV2Activity) mContext).removeView();
 				}
 
 

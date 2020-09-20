@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PromotionNewsActivity"
+            android:name=".PromotionNewsV2Activity"
             android:theme="@style/HiveTheme"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>

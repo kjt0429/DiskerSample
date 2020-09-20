@@ -1,12 +1,15 @@
 package com.disker.promotionnews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -16,13 +19,14 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
-public class PromotionNewsActivity extends AppCompatActivity {
+public class PromotionNewsV2Activity extends AppCompatActivity {
 
 	private TabListAdapter.TabItemHolder clickedTabItem = null;
 
@@ -39,20 +43,44 @@ public class PromotionNewsActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_promotion_news);
+		setContentView(R.layout.activity_promotion_news_v2);
 
 		if(getWindow() != null)
 			Util.setOnSystemUiVisibilityChangeListener(getWindow().getDecorView());
+
+		Intent intent = getIntent();
+		String forced = intent.getStringExtra("forced");
+
+
+		FrameLayout contentViewLayout = findViewById(R.id.contentViewLayout);
+		ConstraintLayout tapLayout = findViewById(R.id.tabLayout);
+		ConstraintLayout bottomLayout = findViewById(R.id.contentLayout_bottom);
+		if(forced.equals("true")){
+			// 바텀 프레임 보임
+			bottomLayout.setVisibility(View.VISIBLE);
+
+			Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+			Point p = new Point();
+			display.getSize(p);
+
+			// TODO: 한쪽 방향 코너 지정 이슈.. (웹뷰 의 경우 shape로 처리도 안되고, 기타 API는 os level 분기)
+			contentViewLayout.setPadding(0,0,0,(int)(p.y*0.09722));
+			tapLayout.setPadding(0,0,0,(int)(p.y*0.09722));
+
+		}else{
+			// 바텀 프레임 보이지 않음
+			bottomLayout.setVisibility(View.INVISIBLE);
+		}
 
 
 		/*
 		생성자에서 무언의 뷰 모델을 받아서 수정하기
 		 */
 
-		ArrayList<String> dummyArray = getTabItemList();
-		for (String data : dummyArray) {
+		ArrayList<NewsV2Model> dummyArray = getTabItemList();
+		for (NewsV2Model data : dummyArray) {
 
-			if(data.equals("banner")){
+			if(data.url.equals("")){
 				fragments.add(new NewsBannerFragment());
 			}else{
 				fragments.add(new NewsWebFragment(data));
@@ -117,10 +145,15 @@ public class PromotionNewsActivity extends AppCompatActivity {
 
 	public void addView(String type) {
 		switch (type) {
-			case "frame":
-				NewsFrameView view = new NewsFrameView(this);
+			case "frame-true":
+				NewsFrameView view = new NewsFrameView(this,true);
 				newsV2View = view; // TODO remove
 				frameLayout.addView(view);
+				break;
+			case "frame-false":
+				NewsFrameView view2 = new NewsFrameView(this,false);
+				newsV2View = view2; // TODO remove
+				frameLayout.addView(view2);
 				break;
 			default:
 				break;
@@ -146,13 +179,15 @@ public class PromotionNewsActivity extends AppCompatActivity {
 	}
 
 	// 테스트 용 더미
-	private ArrayList<String> getTabItemList() {
-		ArrayList<String> list = new ArrayList<>();
+	private ArrayList<NewsV2Model> getTabItemList() {
+		ArrayList<NewsV2Model> list = new ArrayList<>();
 
-		list.add("https://developers.withhive.com/");
-		list.add("https://www.google.com");
-		list.add("banner");
-		list.add("banner");
+		list.add(new NewsV2Model("개발자 사이트","https://developers.withhive.com/"));
+		list.add(new NewsV2Model("구글","https://www.google.com"));
+		list.add(new NewsV2Model("이벤트",""));
+		list.add(new NewsV2Model("이벤트2",""));
+		list.add(new NewsV2Model("이벤트3",""));
+		list.add(new NewsV2Model("이벤트4",""));
 
 
 		return list;
@@ -171,9 +206,9 @@ public class PromotionNewsActivity extends AppCompatActivity {
 
 		private Context mContext;
 		private LayoutInflater mInflater;
-		private ArrayList<String> mItemList;
+		private ArrayList<NewsV2Model> mItemList;
 
-		public TabListAdapter(Context context, ArrayList<String> itemList) {
+		public TabListAdapter(Context context, ArrayList<NewsV2Model> itemList) {
 			super();
 
 			this.mContext = context;
@@ -229,7 +264,7 @@ public class PromotionNewsActivity extends AppCompatActivity {
 
 			// 각 뷰 설정
 			viewHolder.background.setVisibility(View.INVISIBLE);
-			viewHolder.name.setText(mItemList.get(position));
+			viewHolder.name.setText(mItemList.get(position).name);
 			float textScaledPixel = (p.y * 0.034375f) / mContext.getResources().getDisplayMetrics().scaledDensity;
 			viewHolder.name.setTextSize(textScaledPixel);
 
@@ -265,6 +300,16 @@ public class PromotionNewsActivity extends AppCompatActivity {
 					e.printStackTrace();
 				}
 			}
+		}
+	}
+
+	class NewsV2Model{
+		String name;
+		String url;
+
+		public NewsV2Model(String name, String url){
+			this.name = name;
+			this.url = url;
 		}
 	}
 

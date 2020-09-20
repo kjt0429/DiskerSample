@@ -38,7 +38,24 @@ public class NewsBannerFragment extends Fragment {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				((PromotionNewsActivity)getActivity()).addView("frame");
+
+				// TODO: 아래 테스트용 분기를 .. 값 따라 처리하도록 변경
+				switch (position){
+					case 0:
+						((PromotionNewsV2Activity)getActivity()).addView("frame-true");
+						break;
+					case 1:
+						((PromotionNewsV2Activity)getActivity()).addView("frame-false");
+						break;
+					case 2:
+						((PromotionNewsV2Activity)getActivity()).addView("frame");
+						break;
+					default:
+						((PromotionNewsV2Activity)getActivity()).addView("frame");
+						break;
+
+				}
+
 			}
 		});
 
@@ -123,7 +140,7 @@ public class NewsBannerFragment extends Fragment {
 			/*viewHolder.background.setVisibility(View.INVISIBLE);
 			viewHolder.name.setText(mItemList.get(position));*/
 
-			viewHolder.imageView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+			//viewHolder.imageView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
 
 			Log.d("jintae","BANNER FRAGMENT");

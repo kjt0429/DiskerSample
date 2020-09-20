@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PromotionNewsActivity">
+    tools:context=".PromotionNewsV2Activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/com_hive_sdk_promotion_dialog_background_color"
@@ -32,13 +32,15 @@
             android:layout_height="0dp"/>
 
         <FrameLayout
-            android:background="@drawable/promotion_news_frame"
-            app:layout_constraintDimensionRatio="617:329"
             android:id="@+id/frameLayout_frameLayout"
+            android:background="@drawable/promotion_news_frame"
+
+            app:layout_constraintDimensionRatio="617:329"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/frameLayout_marginTop"
             app:layout_constraintBottom_toTopOf="@id/frameLayout_marginBottom"
+
             android:layout_width="0dp"
             android:layout_height="0dp">
 
@@ -46,66 +48,80 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- top layout-->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/contentLayout_top"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <Space
+                    android:id="@+id/contentLayout_marginStart"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.007299"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/contentLayout_bottom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="0dp"
-                    android:layout_height="0dp">
+                    android:layout_height="0dp"/>
 
-                    <Space
-                        android:id="@+id/contentLayout_marginStart"
-                        app:layout_constraintWidth_default="percent"
-                        app:layout_constraintWidth_percent="0.00648"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"/>
+                <Space
+                    android:id="@+id/contentLayout_marginEnd"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.007299"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
 
-                    <Space
-                        android:id="@+id/contentLayout_marginEnd"
-                        app:layout_constraintWidth_default="percent"
-                        app:layout_constraintWidth_percent="0.00648"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"/>
+                <Space
+                    android:id="@+id/contentLayout_marginTop"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.013698"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
 
-                    <Space
-                        android:id="@+id/contentLayout_marginTop"
-                        app:layout_constraintHeight_default="percent"
-                        app:layout_constraintHeight_percent="0.01215"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"/>
+                <Space
+                    android:id="@+id/contentLayout_marginBottom"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.013698"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/contentLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@id/contentLayout_marginBottom"
+                    app:layout_constraintEnd_toStartOf="@id/contentLayout_marginEnd"
+                    app:layout_constraintStart_toEndOf="@id/contentLayout_marginStart"
+                    app:layout_constraintTop_toBottomOf="@id/contentLayout_marginTop">
+
+                    <!-- top layout-->
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/contentLayout"
-                        app:layout_constraintStart_toEndOf="@id/contentLayout_marginStart"
-                        app:layout_constraintEnd_toStartOf="@id/contentLayout_marginEnd"
-                        app:layout_constraintTop_toBottomOf="@id/contentLayout_marginTop"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/contentLayout_top"
                         android:layout_width="0dp"
-                        android:layout_height="0dp">
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-
-                        <FrameLayout
-                            android:id="@+id/contentViewLayout"
+                        <com.disker.promotionnews.PromotionCustomViewRoundedCorner
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintWidth_default="percent"
-                            app:layout_constraintWidth_percent="0.75925" />
+                            app:layout_constraintWidth_percent="0.75925">
 
+                            <FrameLayout
+                                android:id="@+id/contentViewLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent" />
+
+                        </com.disker.promotionnews.PromotionCustomViewRoundedCorner>
 
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -114,7 +130,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintWidth_default="percent"
-                            app:layout_constraintWidth_percent="0.25"
+                            app:layout_constraintWidth_percent="0.24876"
                             android:layout_width="0dp"
                             android:layout_height="0dp">
 
@@ -127,7 +143,6 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"/>
 
-                            <!-- Todo disker -->
                             <ListView
                                 android:listSelector="@android:color/transparent"
                                 android:cacheColorHint="@android:color/transparent"
@@ -139,33 +154,30 @@
                                 android:headerDividersEnabled="false"
                                 android:id="@+id/tabList"
                                 android:layout_width="0dp"
-                                android:layout_height="250dp"
+                                android:layout_height="0dp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tabList_marginTop" />
+                                app:layout_constraintTop_toBottomOf="@id/tabList_marginTop"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <!-- bottom layout -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/contentLayout_bottom"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@drawable/promotion_news_v2_frame_bottom"
+
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent="0.109375" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <!-- bottom layout -->
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:background="@drawable/promotion_news_frame_bottom"
-                    app:layout_constraintHeight_default="percent"
-                    app:layout_constraintHeight_percent="0.11643"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:id="@+id/contentLayout_bottom"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp">
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

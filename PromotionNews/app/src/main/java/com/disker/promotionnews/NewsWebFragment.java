@@ -13,14 +13,14 @@ import androidx.fragment.app.Fragment;
 
 public class NewsWebFragment extends Fragment {
 
-	private String tmpName;
+	private PromotionNewsV2Activity.NewsV2Model newsV2Model;
 
 	public NewsWebFragment() {
 		super();
 	}
 
-	public NewsWebFragment(String tmpName){
-		this.tmpName = tmpName;
+	public NewsWebFragment(PromotionNewsV2Activity.NewsV2Model tmpName){
+		this.newsV2Model = tmpName;
 	}
 
 	@Nullable
@@ -43,7 +43,7 @@ public class NewsWebFragment extends Fragment {
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.getSettings().setUseWideViewPort(true);
 
-		webView.loadUrl(tmpName);
+		webView.loadUrl(newsV2Model.url);
 
 		return viewGroup;
 	}

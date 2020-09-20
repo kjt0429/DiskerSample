@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -15,11 +15,28 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		Button button = findViewById(R.id.button);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(MainActivity.this, PromotionNewsActivity.class));
-			}
-		});
+		button.setOnClickListener(this);
+
+		Button button2 = findViewById(R.id.button2);
+		button2.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+
+		switch (v.getId()) {
+			case R.id.button:
+				Intent intent = new Intent(MainActivity.this, PromotionNewsV2Activity.class);
+				intent.putExtra("forced", "false");
+				startActivity(intent);
+				break;
+			case R.id.button2:
+				Intent intent2 = new Intent(MainActivity.this, PromotionNewsV2Activity.class);
+				intent2.putExtra("forced", "true");
+				startActivity(intent2);
+				break;
+			default:
+				break;
+		}
 	}
 }
