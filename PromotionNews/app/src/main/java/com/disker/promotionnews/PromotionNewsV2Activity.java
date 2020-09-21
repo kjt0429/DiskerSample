@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -17,7 +16,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -51,11 +49,12 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		Intent intent = getIntent();
 		String forced = intent.getStringExtra("forced");
 
+/*
 
 		FrameLayout contentViewLayout = findViewById(R.id.contentViewLayout);
 		ConstraintLayout tapLayout = findViewById(R.id.tabLayout);
 		ConstraintLayout bottomLayout = findViewById(R.id.contentLayout_bottom);
-		if(forced.equals("true")){
+		if (forced.equals("true")) {
 			// 바텀 프레임 보임
 			bottomLayout.setVisibility(View.VISIBLE);
 
@@ -64,31 +63,36 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 			display.getSize(p);
 
 			// TODO: 한쪽 방향 코너 지정 이슈.. (웹뷰 의 경우 shape로 처리도 안되고, 기타 API는 os level 분기)
-			contentViewLayout.setPadding(0,0,0,(int)(p.y*0.09722));
-			tapLayout.setPadding(0,0,0,(int)(p.y*0.09722));
+			contentViewLayout.setPadding(0, 0, 0, (int) (p.y * 0.09722));
+			tapLayout.setPadding(0, 0, 0, (int) (p.y * 0.09722));
 
-		}else{
+		} else {
 			// 바텀 프레임 보이지 않음
 			bottomLayout.setVisibility(View.INVISIBLE);
 		}
 
 
-		/*
+		*/
+/*
 		생성자에서 무언의 뷰 모델을 받아서 수정하기
-		 */
+		 *//*
+*/
 
 		ArrayList<NewsV2Model> dummyArray = getTabItemList();
 		for (NewsV2Model data : dummyArray) {
 
-			if(data.url.equals("")){
+			if (data.url.equals("")) {
 				fragments.add(new NewsBannerFragment());
-			}else{
+			} else {
 				fragments.add(new NewsWebFragment(data));
 			}
 
 		}
 
+/*
 		setFrag(0);
+
+		*/
 
 
 		ListView tabList = findViewById(R.id.tabList);
@@ -96,26 +100,25 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		TabListAdapter tabListAdapter = new TabListAdapter(this, dummyArray);
 		tabList.setAdapter(tabListAdapter);
 
-
+/*
 		tabList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				if(position != 0){
+				if (position != 0) {
 					View v = tabList.getChildAt(0);
-					TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder)v.getTag());
+					TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder) v.getTag());
 					item.offItem();
 				}
 
-				if(clickedTabItem != null){
+				if (clickedTabItem != null) {
 					clickedTabItem.offItem();
 				}
 
 
-				TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder)view.getTag());
+				TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder) view.getTag());
 				item.onItem();
 				clickedTabItem = item;
-
 
 
 				// todo check
@@ -152,6 +155,7 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		float textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
 		forceTextView.setTextSize(textScaledPixel);
 
+*/
 
 
 	}
@@ -224,6 +228,11 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		tran.replace(R.id.contentViewLayout, fragments.get(n));
 		tran.commit();
 
+	}
+
+	// TODO (disker) : 나중에 정확한 값 받아오도록 하기. 현재는 True 가 세로 모드
+	public Boolean getOrientation(){
+		return true;
 	}
 
 	private class TabListAdapter extends BaseAdapter {

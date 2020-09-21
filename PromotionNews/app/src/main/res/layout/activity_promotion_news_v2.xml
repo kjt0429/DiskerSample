@@ -7,8 +7,188 @@
     tools:context=".PromotionNewsV2Activity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/com_hive_sdk_promotion_dialog_background_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Space
+            android:id="@+id/frameLayout_marginStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.030555"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <Space
+            android:id="@+id/frameLayout_marginEnd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.030555"
+            android:layout_width="0dp"
+            android:layout_height="0dp"/>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_frameLayout"
+            android:background="@drawable/promotion_news_frame"
+
+            app:layout_constraintDimensionRatio="338:594"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/frameLayout_marginStart"
+            app:layout_constraintEnd_toStartOf="@id/frameLayout_marginEnd"
+
+            android:layout_width="0dp"
+            android:layout_height="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Space
+                    android:id="@+id/contentLayout_marginStart"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.0125"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+
+                <Space
+                    android:id="@+id/contentLayout_marginEnd"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.0125"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+
+                <Space
+                    android:id="@+id/contentLayout_marginTop"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.00704"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+
+                <Space
+                    android:id="@+id/contentLayout_marginBottom"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.00704"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contentLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/contentLayout_marginBottom"
+                app:layout_constraintEnd_toStartOf="@id/contentLayout_marginEnd"
+                app:layout_constraintStart_toEndOf="@id/contentLayout_marginStart"
+                app:layout_constraintTop_toBottomOf="@id/contentLayout_marginTop">
+
+                <Space
+                    android:id="@+id/tabLayout_marginTop"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.025641"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="#ff4251"
+                    android:id="@+id/tabLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+
+                    app:layout_constraintTop_toBottomOf="@id/tabLayout_marginTop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent="0.10085"
+                    >
+
+                    
+
+                    <ListView
+                        android:listSelector="@android:color/transparent"
+                        android:cacheColorHint="@android:color/transparent"
+                        android:overScrollMode="never"
+                        android:fadingEdgeLength="0dp"
+                        android:divider="@null"
+                        android:scrollbars="none"
+                        android:footerDividersEnabled="false"
+                        android:headerDividersEnabled="false"
+                        android:id="@+id/tabList"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </FrameLayout>
+
+        <!-- close button -->
+        <Space
+            android:id="@+id/frameLayout_frameLayout_padding_End"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.08055"
+
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintEnd_toEndOf="@id/frameLayout_frameLayout"/>
+
+        <Space
+            android:id="@+id/frameLayout_frameLayout_padding_Top"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.021052"
+
+            app:layout_constraintStart_toStartOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout_frameLayout"
+            app:layout_constraintTop_toTopOf="@+id/frameLayout_frameLayout"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/frame_close_btn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintStart_toStartOf="@id/frameLayout_frameLayout_padding_End"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout_frameLayout_padding_Top"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintDimensionRatio="1:1"
+
+            app:srcCompat="@drawable/promotion_news_v2_frame_close_btn" />
 
 
 
