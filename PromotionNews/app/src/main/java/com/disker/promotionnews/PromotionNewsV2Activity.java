@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -36,6 +34,8 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 	FragmentTransaction tran;
 
 	FrameLayout frameLayout;
+
+	FrameLayout fullscreenFrameLayout;
 
 
 	FrameLayout newsV2View;
@@ -139,6 +139,19 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		});
 
 
+		fullscreenFrameLayout = findViewById(R.id.fullscreen_frameLayout);
+
+
+		// 바텀에 글자 크기 지정
+		// 높이 계산
+		Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		Point p = new Point();
+		display.getSize(p);
+
+		AppCompatTextView forceTextView = findViewById(R.id.forceTextView);
+		float textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		forceTextView.setTextSize(textScaledPixel);
+
 
 
 	}
@@ -155,6 +168,11 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 				newsV2View = view2; // TODO remove
 				frameLayout.addView(view2);
 				break;
+			case "fullscreen":
+				NewsV2FullScreenView view3 = new NewsV2FullScreenView(this);
+				newsV2View = view3;
+				fullscreenFrameLayout.addView(view3);
+				break;
 			default:
 				break;
 		}
@@ -162,8 +180,14 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 
 	}
 
-	public void removeView(){
+	// TODO: 예외처리 하기
+	public void removeFrameView(){
 		frameLayout.removeView(newsV2View);
+	}
+
+	// TODO: 예외처리 하기
+	public void removeFullscreenView(){
+		fullscreenFrameLayout.removeView(newsV2View);
 	}
 
 	public View getViewByPosition(int pos, ListView listView) {

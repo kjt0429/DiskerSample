@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 class NewsFrameView extends FrameLayout {
@@ -78,12 +79,23 @@ class NewsFrameView extends FrameLayout {
 				if (webView.canGoBack()) {
 					webView.goBack();
 				} else {
-					((PromotionNewsV2Activity) mContext).removeView();
+					((PromotionNewsV2Activity) mContext).removeFrameView();
 				}
 
 
 			}
 		});
+
+
+		// 바텀에 글자 크기 지정
+		// 높이 계산
+		Display display = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		Point p = new Point();
+		display.getSize(p);
+
+		AppCompatTextView forceTextView = findViewById(R.id.forceTextView);
+		float textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		forceTextView.setTextSize(textScaledPixel);
 
 
 		setRadiusSizeRatio();

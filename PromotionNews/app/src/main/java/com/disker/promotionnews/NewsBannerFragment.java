@@ -48,7 +48,7 @@ public class NewsBannerFragment extends Fragment {
 						((PromotionNewsV2Activity)getActivity()).addView("frame-false");
 						break;
 					case 2:
-						((PromotionNewsV2Activity)getActivity()).addView("frame");
+						((PromotionNewsV2Activity)getActivity()).addView("fullscreen");
 						break;
 					default:
 						((PromotionNewsV2Activity)getActivity()).addView("frame");
