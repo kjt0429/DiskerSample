@@ -1,7 +1,13 @@
 package com.disker.promotionnews;
 
+import android.content.Context;
+import android.graphics.Point;
 import android.os.Build;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
 
 class Util {
 
@@ -57,5 +63,13 @@ class Util {
 		}
 
 		return uiFlags;
+	}
+
+	public static Point getScreenSize(@NonNull Context context){
+		Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		Point p = new Point();
+		display.getSize(p);
+
+		return p;
 	}
 }

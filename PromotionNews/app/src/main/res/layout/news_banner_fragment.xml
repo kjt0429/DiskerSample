@@ -4,31 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:listSelector="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent"
-        android:overScrollMode="never"
-        android:fadingEdgeLength="0dp"
-        android:divider="@null"
-        android:scrollbars="none"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/promotion_news_banner_listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/promotion_news_banner_listView_marginTop" />
-
-    <Space
-        android:id="@+id/promotion_news_banner_listView_marginTop"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="410:6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

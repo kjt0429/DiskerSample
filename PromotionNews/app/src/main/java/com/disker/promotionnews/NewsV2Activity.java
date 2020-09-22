@@ -5,26 +5,24 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class PromotionNewsV2Activity extends AppCompatActivity {
-
-	private TabListAdapter.TabItemHolder clickedTabItem = null;
+public class NewsV2Activity extends AppCompatActivity {
 
 	private ArrayList<Fragment> fragments = new ArrayList<>();
 
@@ -49,7 +47,7 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		Intent intent = getIntent();
 		String forced = intent.getStringExtra("forced");
 
-/*
+
 
 		FrameLayout contentViewLayout = findViewById(R.id.contentViewLayout);
 		ConstraintLayout tapLayout = findViewById(R.id.tabLayout);
@@ -72,11 +70,10 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		}
 
 
-		*/
+
 /*
 		생성자에서 무언의 뷰 모델을 받아서 수정하기
-		 *//*
-*/
+		 */
 
 		ArrayList<NewsV2Model> dummyArray = getTabItemList();
 		for (NewsV2Model data : dummyArray) {
@@ -89,43 +86,18 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 
 		}
 
-/*
 		setFrag(0);
 
-		*/
 
+		/* Set Tab-List */
+		RecyclerView tabList = findViewById(R.id.tabList);
+		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+		tabList.setLayoutManager(linearLayoutManager);
 
-		ListView tabList = findViewById(R.id.tabList);
+		NewsV2TabRecyclerViewAdapter adapter = new NewsV2TabRecyclerViewAdapter(this, dummyArray);
+		adapter.setOnItemClickListener((v, position) -> setFrag(position));
 
-		TabListAdapter tabListAdapter = new TabListAdapter(this, dummyArray);
-		tabList.setAdapter(tabListAdapter);
-
-/*
-		tabList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-				if (position != 0) {
-					View v = tabList.getChildAt(0);
-					TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder) v.getTag());
-					item.offItem();
-				}
-
-				if (clickedTabItem != null) {
-					clickedTabItem.offItem();
-				}
-
-
-				TabListAdapter.TabItemHolder item = ((TabListAdapter.TabItemHolder) view.getTag());
-				item.onItem();
-				clickedTabItem = item;
-
-
-				// todo check
-				setFrag(position);
-
-			}
-		});
+		tabList.setAdapter(adapter);
 
 
 		// TODO
@@ -155,7 +127,7 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		float textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
 		forceTextView.setTextSize(textScaledPixel);
 
-*/
+
 
 
 	}
@@ -221,7 +193,7 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		return list;
 	}
 
-	public void setFrag(int n){    //프래그먼트를 교체하는 작업을 하는 메소드를 만들었습니다
+	public void setFrag(int n) {
 		fm = getSupportFragmentManager();
 		tran = fm.beginTransaction();
 
@@ -235,115 +207,5 @@ public class PromotionNewsV2Activity extends AppCompatActivity {
 		return true;
 	}
 
-	private class TabListAdapter extends BaseAdapter {
-
-		private Context mContext;
-		private LayoutInflater mInflater;
-		private ArrayList<NewsV2Model> mItemList;
-
-		public TabListAdapter(Context context, ArrayList<NewsV2Model> itemList) {
-			super();
-
-			this.mContext = context;
-			this.mItemList = itemList;
-
-			this.mInflater = (LayoutInflater) context.getSystemService((Context.LAYOUT_INFLATER_SERVICE));
-
-		}
-
-		@Override
-		public int getCount() {
-			return mItemList.size();
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return mItemList.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			TabItemHolder viewHolder;
-
-			if(convertView == null){
-				convertView = mInflater.inflate(R.layout.promotion_news_tab_item, parent, false);
-
-				// 레이아웃 매핑
-				viewHolder = new TabItemHolder();
-				viewHolder.background = (AppCompatImageView) convertView.findViewById(R.id.tabItem_background);
-				viewHolder.name = (AppCompatTextView) convertView.findViewById(R.id.tabItem_textView);
-				//viewHolder = (ImageView) convertView.find ~`
-				//
-
-				convertView.setTag(viewHolder);
-
-			}else{
-				viewHolder = (TabItemHolder) convertView.getTag();
-
-			}
-			// 높이 계산
-			Display display = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-			Point p = new Point();
-			display.getSize(p);
-
-			ViewGroup.LayoutParams params = convertView.getLayoutParams();
-			params.height = (int) (p.y * 0.15);
-			convertView.setLayoutParams(params);
-
-			// 각 뷰 설정
-			viewHolder.background.setVisibility(View.INVISIBLE);
-			viewHolder.name.setText(mItemList.get(position).name);
-			float textScaledPixel = (p.y * 0.034375f) / mContext.getResources().getDisplayMetrics().scaledDensity;
-			viewHolder.name.setTextSize(textScaledPixel);
-
-
-			if(position==0){
-				viewHolder.onItem();
-			}
-
-			return convertView;
-
-		}
-
-
-		public class TabItemHolder{
-			public AppCompatImageView background;
-			public AppCompatImageView icon;
-			public AppCompatTextView name;
-
-			public void onItem(){
-				try {
-					background.setVisibility(View.VISIBLE);
-					name.setTextColor(getResources().getColor(R.color.colorWhite));
-				}catch (Exception e){
-					e.printStackTrace();
-				}
-			}
-
-			public void offItem(){
-				try {
-					background.setVisibility(View.INVISIBLE);
-					name.setTextColor(getResources().getColor(R.color.com_hive_sdk_promotion_news_tab_item_color));
-				}catch (Exception e){
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	class NewsV2Model{
-		String name;
-		String url;
-
-		public NewsV2Model(String name, String url){
-			this.name = name;
-			this.url = url;
-		}
-	}
 
 }

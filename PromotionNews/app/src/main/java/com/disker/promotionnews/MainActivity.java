@@ -29,12 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 		switch (v.getId()) {
 			case R.id.button:
-				Intent intent = new Intent(MainActivity.this, PromotionNewsV2Activity.class);
+				Intent intent = new Intent(MainActivity.this, NewsV2Activity.class);
 				intent.putExtra("forced", "false");
 				startActivity(intent);
 				break;
 			case R.id.button2:
-				Intent intent2 = new Intent(MainActivity.this, PromotionNewsV2Activity.class);
+				Intent intent2 = new Intent(MainActivity.this, NewsV2Activity.class);
 				intent2.putExtra("forced", "true");
 				startActivity(intent2);
 				break;

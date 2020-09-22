@@ -79,7 +79,7 @@ class NewsFrameView extends FrameLayout {
 				if (webView.canGoBack()) {
 					webView.goBack();
 				} else {
-					((PromotionNewsV2Activity) mContext).removeFrameView();
+					((NewsV2Activity) mContext).removeFrameView();
 				}
 
 

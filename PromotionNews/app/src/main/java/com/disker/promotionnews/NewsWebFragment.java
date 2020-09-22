@@ -13,13 +13,13 @@ import androidx.fragment.app.Fragment;
 
 public class NewsWebFragment extends Fragment {
 
-	private PromotionNewsV2Activity.NewsV2Model newsV2Model;
+	private NewsV2Model newsV2Model;
 
 	public NewsWebFragment() {
 		super();
 	}
 
-	public NewsWebFragment(PromotionNewsV2Activity.NewsV2Model tmpName){
+	public NewsWebFragment(NewsV2Model tmpName){
 		this.newsV2Model = tmpName;
 	}
 

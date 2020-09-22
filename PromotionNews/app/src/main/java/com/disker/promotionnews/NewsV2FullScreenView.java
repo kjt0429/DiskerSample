@@ -1,7 +1,6 @@
 package com.disker.promotionnews;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -44,10 +43,8 @@ public class NewsV2FullScreenView extends FrameLayout {
 
 			    if (webView.canGoBack()) {
 				    webView.goBack();
-				    Log.d("disker1","1");
 			    } else {
-				    ((PromotionNewsV2Activity) mContext).removeFullscreenView();
-				    Log.d("disker1","2");
+				    ((NewsV2Activity) mContext).removeFullscreenView();
 			    }
 
 
@@ -58,7 +55,7 @@ public class NewsV2FullScreenView extends FrameLayout {
 	    closeBtn.setOnClickListener(new OnClickListener() {
 		    @Override
 		    public void onClick(View v) {
-			    ((PromotionNewsV2Activity)mContext).finish();
+			    ((NewsV2Activity)mContext).finish();
 		    }
 	    });
 
