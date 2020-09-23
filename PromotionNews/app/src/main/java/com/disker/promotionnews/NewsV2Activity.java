@@ -1,19 +1,13 @@
 package com.disker.promotionnews;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -47,11 +41,13 @@ public class NewsV2Activity extends AppCompatActivity {
 		Intent intent = getIntent();
 		String forced = intent.getStringExtra("forced");
 
+/*
 
 
 		FrameLayout contentViewLayout = findViewById(R.id.contentViewLayout);
 		ConstraintLayout tapLayout = findViewById(R.id.tabLayout);
 		ConstraintLayout bottomLayout = findViewById(R.id.contentLayout_bottom);
+
 		if (forced.equals("true")) {
 			// 바텀 프레임 보임
 			bottomLayout.setVisibility(View.VISIBLE);
@@ -71,11 +67,15 @@ public class NewsV2Activity extends AppCompatActivity {
 
 
 
+*/
 /*
 		생성자에서 무언의 뷰 모델을 받아서 수정하기
-		 */
+		 *//*
 
+*/
 		ArrayList<NewsV2Model> dummyArray = getTabItemList();
+
+/*
 		for (NewsV2Model data : dummyArray) {
 
 			if (data.url.equals("")) {
@@ -89,20 +89,47 @@ public class NewsV2Activity extends AppCompatActivity {
 		setFrag(0);
 
 
-		/* Set Tab-List */
+		*/
+/* Set Tab-List */
+
 		RecyclerView tabList = findViewById(R.id.tabList);
-		LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
+		LinearLayoutManager linearLayoutManager;
+		if(Util.isPortrait()){
+			linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+		}else{
+			linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+		}
+
 		tabList.setLayoutManager(linearLayoutManager);
 
 		NewsV2TabRecyclerViewAdapter adapter = new NewsV2TabRecyclerViewAdapter(this, dummyArray);
-		adapter.setOnItemClickListener((v, position) -> setFrag(position));
+		adapter.setOnItemClickListener((v, position) -> {}/*setFrag(position)*/);
 
 		tabList.setAdapter(adapter);
-
+/*
 
 		// TODO
 		frameLayout = findViewById(R.id.frameLayout_frameLayout);
 
+
+
+
+
+		fullscreenFrameLayout = findViewById(R.id.fullscreen_frameLayout);
+
+
+		// 바텀에 글자 크기 지정
+		// 높이 계산
+		Point p = Util.getScreenSize(this);
+
+		AppCompatTextView forceTextView = findViewById(R.id.forceTextView);
+		float textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		forceTextView.setTextSize(textScaledPixel);
+
+
+*/
+		// 우측 클로즈 버튼
 		AppCompatImageView frame_close_btn = findViewById(R.id.frame_close_btn);
 
 		// TODO: 애니메이션 처리해야함
@@ -112,22 +139,6 @@ public class NewsV2Activity extends AppCompatActivity {
 				finish();
 			}
 		});
-
-
-		fullscreenFrameLayout = findViewById(R.id.fullscreen_frameLayout);
-
-
-		// 바텀에 글자 크기 지정
-		// 높이 계산
-		Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		Point p = new Point();
-		display.getSize(p);
-
-		AppCompatTextView forceTextView = findViewById(R.id.forceTextView);
-		float textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
-		forceTextView.setTextSize(textScaledPixel);
-
-
 
 
 	}
@@ -202,10 +213,7 @@ public class NewsV2Activity extends AppCompatActivity {
 
 	}
 
-	// TODO (disker) : 나중에 정확한 값 받아오도록 하기. 현재는 True 가 세로 모드
-	public Boolean getOrientation(){
-		return true;
-	}
+
 
 
 }

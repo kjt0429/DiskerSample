@@ -33,7 +33,6 @@
 
         <FrameLayout
             android:id="@+id/frameLayout_frameLayout"
-            android:background="@drawable/promotion_news_frame"
 
             app:layout_constraintDimensionRatio="338:594"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +42,12 @@
 
             android:layout_width="0dp"
             android:layout_height="0dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/frameLayout_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/promotion_news_frame"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -110,7 +115,6 @@
                     app:layout_constraintHeight_percent="0.025641"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:background="#ff4251"
                     android:id="@+id/tabLayout"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -123,24 +127,15 @@
                     app:layout_constraintHeight_percent="0.10085"
                     >
 
-                    
-
-                    <ListView
-                        android:listSelector="@android:color/transparent"
-                        android:cacheColorHint="@android:color/transparent"
-                        android:overScrollMode="never"
-                        android:fadingEdgeLength="0dp"
-                        android:divider="@null"
-                        android:scrollbars="none"
-                        android:footerDividersEnabled="false"
-                        android:headerDividersEnabled="false"
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/tabList"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -34,7 +34,6 @@
 
         <FrameLayout
             android:id="@+id/frameLayout_frameLayout"
-            android:background="@drawable/promotion_news_frame"
 
             app:layout_constraintDimensionRatio="617:329"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +43,12 @@
 
             android:layout_width="0dp"
             android:layout_height="0dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/frameLayout_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/promotion_news_frame"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

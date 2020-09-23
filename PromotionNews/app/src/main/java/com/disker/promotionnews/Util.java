@@ -72,4 +72,9 @@ class Util {
 
 		return p;
 	}
+
+	// TODO (disker) : 나중에 정확한 값 받아오도록 하기. 현재는 True 가 세로 모드
+	public static Boolean isPortrait(){
+		return true;
+	}
 }
