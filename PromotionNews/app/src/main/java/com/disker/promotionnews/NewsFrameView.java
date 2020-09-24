@@ -2,8 +2,6 @@ package com.disker.promotionnews;
 
 import android.content.Context;
 import android.graphics.Point;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +28,7 @@ class NewsFrameView extends FrameLayout {
 	public NewsFrameView(@NonNull Context context, Boolean isForced) {
 		super(context);
 		mContext = context;
-		isForced = isForced;
+		this.isForced = isForced;
 
 		ViewGroup viewGroup = (ViewGroup)View.inflate(context, R.layout.news_frame_view, this);
 
@@ -39,7 +37,7 @@ class NewsFrameView extends FrameLayout {
 
 		ConstraintLayout bottomLayout = viewGroup.findViewById(R.id.contentLayout_bottom);
 
-		if(isForced){
+		if(this.isForced){
 			// 바텀 프레임 보임
 			bottomLayout.setVisibility(View.VISIBLE);
 
@@ -48,7 +46,12 @@ class NewsFrameView extends FrameLayout {
 			display.getSize(p);
 
 			// TODO: 한쪽 방향 코너 지정 이슈.. (웹뷰 의 경우 shape로 처리도 안되고, 기타 API는 os level 분기)
-			roundedCorner.setPadding(0,0,0,(int)(p.y*0.09722));
+			if(Util.isPortrait()){
+				roundedCorner.setPadding(0, 0, 0, (int) (p.y * 0.05281));
+			}
+			else {
+				roundedCorner.setPadding(0, 0, 0, (int) (p.y * 0.09722));
+			}
 
 		}else{
 			// 바텀 프레임 보이지 않음
@@ -68,7 +71,7 @@ class NewsFrameView extends FrameLayout {
 // Adjust web display
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.getSettings().setUseWideViewPort(true);
-		webView.loadUrl("https://developers.withhive.com/");
+		webView.loadUrl("https://namu.wiki/w/LG");
 
 
 		AppCompatImageView backBtn = viewGroup.findViewById(R.id.back_imageView);
@@ -89,45 +92,25 @@ class NewsFrameView extends FrameLayout {
 
 		// 바텀에 글자 크기 지정
 		// 높이 계산
-		Display display = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		Point p = new Point();
-		display.getSize(p);
+		Point p = Util.getScreenSize(mContext);
 
 		AppCompatTextView forceTextView = findViewById(R.id.forceTextView);
-		float textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		float textScaledPixel;
+		if(Util.isPortrait()){
+			textScaledPixel = (p.x * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		}else {
+			textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		}
 		forceTextView.setTextSize(textScaledPixel);
 
 
-		setRadiusSizeRatio();
-	}
+		if(Util.isPortrait()){
+			roundedCorner.setScaledCornerSize(PromotionCustomViewRoundedCorner.SCALED_DIRECTION_Y, 439, 8.5f);
+		}else{
+			roundedCorner.setScaledCornerSize(PromotionCustomViewRoundedCorner.SCALED_DIRECTION_X, 456, 8.5f);
+		}
 
-	/**
-	 * 비율에 따라 코너 라운드 처리
-	 * 기준 사이즈 screen(480 * 320), radius(8.5dp)
-	 */
-	private void setRadiusSizeRatio() {
-
-		float defaultRadiusDP = 8.5f;
-		float defaultHeight = 320f;
-
-		Display display = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		Point p = new Point();
-		display.getSize(p);
-
-		float ratio = p.y / convertDpToPx(defaultHeight);
-
-		defaultRadiusDP *= ratio;
-
-		roundedCorner.setCornerRadius(convertDpToPx(defaultRadiusDP));
 
 	}
-
-	private float convertDpToPx(float dp) {
-		DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
-		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics);
-	}
-
-
-
 
 }

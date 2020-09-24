@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="promotion_news_banner_item_imageView_marginStart_ratio">6:88</string>
+    <item name="promotion_news_banner_item_imageView_round_percent" type="dimen" format="float">0.93181</item>
+    <item name="promotion_news_banner_item_gift_imageView_height_percent" type="dimen" format="float">0.363636</item>
+    <item name="promotion_news_banner_frame_view_margin_top_bottom" type="dimen" format="float">0.013698</item>
+    <item name="promotion_news_banner_frame_view_margin_start_end" type="dimen" format="float">0.007299</item>
+
+    <item name="promotion_news_banner_frame_view_bottom_content_height_percent" type="dimen" format="float">0.109375</item>
+
+</resources>

@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.21568"
+        app:layout_constraintHeight_percent="0.09803"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.39215">
+        app:layout_constraintHeight_percent="0.62745">
 
         <Space
             android:id="@+id/tabItem_icon_marginStart"
@@ -47,13 +47,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
 
-            app:layout_constraintDimensionRatio="16:20"/>
+            app:layout_constraintDimensionRatio="14:32"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/tabItem_icon"
             app:layout_constraintStart_toEndOf="@id/tabItem_icon_marginStart"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.625"
 
             app:layout_constraintDimensionRatio="1:1"
             app:srcCompat="@drawable/promotion_news_tab_item_default_icon"
@@ -72,7 +75,7 @@
 
             <Space
                 android:id="@+id/tabItem_icon_marginEnd"
-                app:layout_constraintDimensionRatio="4:20"
+                app:layout_constraintDimensionRatio="4:32"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +96,18 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tabItem_badge"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tabItem_textView_layout"
+            app:layout_constraintHeight_percent="0.1875"
+            app:layout_constraintDimensionRatio="1:1"
+            app:srcCompat="@drawable/promotion_news_v2_badge"/>
+
+
         <Space
             android:id="@+id/tabItem_textView_layout_marginEnd"
             android:layout_width="0dp"
@@ -101,45 +116,9 @@
             app:layout_constraintStart_toEndOf="@id/tabItem_textView_layout"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="16:20"/>
+            app:layout_constraintDimensionRatio="16:32"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-    <Space
-        android:id="@+id/tabItem_badge_marginBottom"
-
-        app:layout_constraintBottom_toTopOf="@id/tabItem_icon"
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
-
-
-    <Space
-        android:id="@+id/tabItem_badge_marginStart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.059259"
-        android:layout_width="0dp"
-        android:layout_height="0dp"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/tabItem_badge"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        app:layout_constraintTop_toBottomOf="@id/tabItem_badge_marginTop"
-        app:layout_constraintStart_toEndOf="@id/tabItem_badge_marginStart"
-        app:layout_constraintHeight_percent="0.0125"
-        app:layout_constraintDimensionRatio="1:1"
-        app:srcCompat="@drawable/promotion_news_v2_badge"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

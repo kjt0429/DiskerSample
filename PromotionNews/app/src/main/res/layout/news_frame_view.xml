@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.013698"
+        app:layout_constraintHeight_percent="@dimen/promotion_news_banner_frame_view_margin_top_bottom"
         app:layout_constraintHeight_default="percent"/>
 
     <Space
@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.013698"
+        app:layout_constraintHeight_percent="@dimen/promotion_news_banner_frame_view_margin_top_bottom"
         app:layout_constraintHeight_default="percent"/>
 
     <Space
@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.007299"
+        app:layout_constraintWidth_percent="@dimen/promotion_news_banner_frame_view_margin_start_end"
         app:layout_constraintWidth_default="percent"/>
 
     <Space
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.007299"
+        app:layout_constraintWidth_percent="@dimen/promotion_news_banner_frame_view_margin_start_end"
         app:layout_constraintWidth_default="percent"/>
 
     <com.disker.promotionnews.PromotionCustomViewRoundedCorner
@@ -75,7 +75,7 @@
                 android:id="@+id/webView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"/>
-            
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/back_imageView"
                 app:srcCompat="@drawable/promotion_news_v2_back_btn"
@@ -90,12 +90,11 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"/>
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </com.disker.promotionnews.PromotionCustomViewRoundedCorner>
+
     <!-- bottom layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contentLayout_bottom"
@@ -107,7 +106,8 @@
         app:layout_constraintEnd_toStartOf="@id/content_marginEnd"
         app:layout_constraintBottom_toTopOf="@id/content_marginBottom"
         app:layout_constraintHeight_default="percent"
-        app:layout_constraintHeight_percent="0.109375">
+        app:layout_constraintHeight_percent="@dimen/promotion_news_banner_frame_view_bottom_content_height_percent">
+
         <Space
             android:id="@+id/forceBtn_marginStart"
             android:layout_width="0dp"

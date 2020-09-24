@@ -50,10 +50,20 @@ public class NewsV2BannerRecyclerViewAdapter extends RecyclerView.Adapter<NewsV2
 		// 높이 계산
 		Point p = Util.getScreenSize(mContext);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.layout.getLayoutParams();
-		params.height = (int) (p.y * 0.275);
 
-		if (position == 0) {
-			params.setMargins(0, (int) (p.y * 0.01875f), 0, 0);
+		if(Util.isPortrait()){
+			params.height = (int) (p.y * 0.16373f);
+
+			if (position == 0) {
+				params.setMargins(0, (int) (p.y * 0.01056f), 0, 0);
+			}
+		}
+		else {
+			params.height = (int) (p.y * 0.275f);
+
+			if (position == 0) {
+				params.setMargins(0, (int) (p.y * 0.01875f), 0, 0);
+			}
 		}
 
 	}

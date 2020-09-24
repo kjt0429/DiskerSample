@@ -68,7 +68,9 @@ public class NewsV2TabRecyclerViewAdapter extends RecyclerView.Adapter<NewsV2Tab
 			int lastPosition = mItemList.size() - 1;
 			if (position == 0) {
 				setSelectedItemHolder(holder);
+				params.setMargins((int) (p.x * 0.03125f), 0, 0, 0);
 			} else if (position == lastPosition) {
+				params.setMargins(0, 0, (int) (p.x * 0.03125f), 0);
 			}
 		}
 		else {

@@ -1,13 +1,15 @@
 package com.disker.promotionnews;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -30,6 +32,8 @@ public class NewsV2Activity extends AppCompatActivity {
 
 	FrameLayout newsV2View;
 
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,24 +45,28 @@ public class NewsV2Activity extends AppCompatActivity {
 		Intent intent = getIntent();
 		String forced = intent.getStringExtra("forced");
 
-/*
+
 
 
 		FrameLayout contentViewLayout = findViewById(R.id.contentViewLayout);
 		ConstraintLayout tapLayout = findViewById(R.id.tabLayout);
+
 		ConstraintLayout bottomLayout = findViewById(R.id.contentLayout_bottom);
 
 		if (forced.equals("true")) {
 			// 바텀 프레임 보임
 			bottomLayout.setVisibility(View.VISIBLE);
 
-			Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-			Point p = new Point();
-			display.getSize(p);
+			Point p = Util.getScreenSize(this);
 
 			// TODO: 한쪽 방향 코너 지정 이슈.. (웹뷰 의 경우 shape로 처리도 안되고, 기타 API는 os level 분기)
-			contentViewLayout.setPadding(0, 0, 0, (int) (p.y * 0.09722));
-			tapLayout.setPadding(0, 0, 0, (int) (p.y * 0.09722));
+
+			if(Util.isPortrait()){
+				contentViewLayout.setPadding(0, 0, 0, (int) (p.y * 0.05281));
+			}else {
+				contentViewLayout.setPadding(0, 0, 0, (int) (p.y * 0.09722));
+				tapLayout.setPadding(0, 0, 0, (int) (p.y * 0.09722));
+			}
 
 		} else {
 			// 바텀 프레임 보이지 않음
@@ -67,15 +75,12 @@ public class NewsV2Activity extends AppCompatActivity {
 
 
 
-*/
-/*
+		/*
 		생성자에서 무언의 뷰 모델을 받아서 수정하기
-		 *//*
+		 */
 
-*/
 		ArrayList<NewsV2Model> dummyArray = getTabItemList();
 
-/*
 		for (NewsV2Model data : dummyArray) {
 
 			if (data.url.equals("")) {
@@ -89,7 +94,7 @@ public class NewsV2Activity extends AppCompatActivity {
 		setFrag(0);
 
 
-		*/
+
 /* Set Tab-List */
 
 		RecyclerView tabList = findViewById(R.id.tabList);
@@ -104,10 +109,10 @@ public class NewsV2Activity extends AppCompatActivity {
 		tabList.setLayoutManager(linearLayoutManager);
 
 		NewsV2TabRecyclerViewAdapter adapter = new NewsV2TabRecyclerViewAdapter(this, dummyArray);
-		adapter.setOnItemClickListener((v, position) -> {}/*setFrag(position)*/);
+		adapter.setOnItemClickListener((v, position) -> setFrag(position));
 
 		tabList.setAdapter(adapter);
-/*
+
 
 		// TODO
 		frameLayout = findViewById(R.id.frameLayout_frameLayout);
@@ -124,11 +129,17 @@ public class NewsV2Activity extends AppCompatActivity {
 		Point p = Util.getScreenSize(this);
 
 		AppCompatTextView forceTextView = findViewById(R.id.forceTextView);
-		float textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		float textScaledPixel;
+		if(Util.isPortrait()){
+			textScaledPixel = (p.x * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		}
+		else {
+			textScaledPixel = (p.y * 0.031388f) / getResources().getDisplayMetrics().scaledDensity;
+		}
 		forceTextView.setTextSize(textScaledPixel);
 
 
-*/
+
 		// 우측 클로즈 버튼
 		AppCompatImageView frame_close_btn = findViewById(R.id.frame_close_btn);
 
@@ -177,17 +188,6 @@ public class NewsV2Activity extends AppCompatActivity {
 		fullscreenFrameLayout.removeView(newsV2View);
 	}
 
-	public View getViewByPosition(int pos, ListView listView) {
-		final int firstListItemPosition = listView.getFirstVisiblePosition();
-		final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
-
-		if (pos < firstListItemPosition || pos > lastListItemPosition) {
-			return listView.getAdapter().getView(pos, null, listView);
-		} else {
-			final int childIndex = pos - firstListItemPosition;
-			return listView.getChildAt(childIndex);
-		}
-	}
 
 	// 테스트 용 더미
 	private ArrayList<NewsV2Model> getTabItemList() {
